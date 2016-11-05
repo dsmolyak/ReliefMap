@@ -37,9 +37,9 @@
             initMap();
         </script>
         <div style="text-align: center">
-            <button class="submission">Enter My Coordinates</button>
-            <textarea onfocus="clearContents(this)" class="submission">Latitude</textarea>
-            <textarea onfocus="clearContents(this)" class="submission">Longitude</textarea>
+            <button class="submission" onclick="myCord()">Enter My Coordinates</button>
+            <textarea id="latarea" onfocus="clearContents(this)" class="submission">Latitude</textarea>
+            <textarea id="longarea" onfocus="clearContents(this)" class="submission">Longitude</textarea>
             <button class="submission">Submit Lat/Long</button>
         </div>
 
