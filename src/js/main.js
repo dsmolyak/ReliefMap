@@ -23,7 +23,7 @@ var map;
         dispMap(me);
     }
 
-function dispMap(cur) {
+    function dispMap(cur) {
          map = new google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: cur
@@ -32,4 +32,8 @@ function dispMap(cur) {
             position: cur,
             map: map
         });
+    }
+
+    function clearContents(element) {
+        element.value = '';
     }

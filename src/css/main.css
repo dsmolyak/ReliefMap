@@ -94,10 +94,12 @@ textarea {
     width: 100%;
 }
 
-#button {
-    height: 100px;
-    width: 100%;
+.submission {
+    height: 50px;
+    width: 100px;
+    text-align: center;
 }
+
 
 
 
