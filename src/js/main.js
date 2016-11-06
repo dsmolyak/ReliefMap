@@ -1,7 +1,8 @@
 var me = {};
-var mel;
+var mel = {};
 var map;
 var cord ={};
+var geoQuery;
     function initMap() {
         var x = document.getElementById("demo");
         if (navigator.geolocation) {
@@ -14,8 +15,24 @@ var cord ={};
                 dispMap(me);
             }
         }
-    }
 
+    }
+    function popMap() {
+        var firebaseRef = firebase.database().ref();
+        var geoFire = new GeoFire(firebaseRef);
+        geoQuery = geoFire.query({
+            center: [me.lat, me.lng],
+            radius: 120000
+        });
+        geoQuery.on("key_entered", function(key, location, distance) {
+            var lo = {
+                lat : location.latitude,
+                lng : location.longitude
+            };
+            adPin(lo );
+        });
+
+    }
     function setMe (position) {
         var a= ""+position.coords.latitude+"";
         var b= ""+position.coords.longitude+"";
@@ -24,15 +41,25 @@ var cord ={};
         dispMap(me);
     }
 
+    function adPin(cur) {
+        var ts= {};
+        var a= ""+cur.lat+"";
+        var b= ""+cur.lng+"";
+        ts.lat = parseFloat(a);
+        ts.lng = parseFloat(b);
+        mel[Math.round(Math.random()*10000)] = new google.maps.Marker({
+            position: ts,
+            map: map
+        });
+        document.getElementById('map').value =map;
+    }
+
     function dispMap(cur) {
          map = new google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: cur
         });
-        mel = new google.maps.Marker({
-            position: cur,
-            map: map
-        });
+       adPin(cur);
     }
 
     function myCord() {
@@ -79,18 +106,32 @@ var cord ={};
     }
 
     function addToFireBase() {
-        // var ref = new Firebase('https://reliefmap-1478369855798.firebaseio.com/');
-        writeUserData(123, "daniel", "daniel@a.com", "adfsda.jpg")
-
-        var database = firebase.database();
-
+       // writeUserData(123, "daniel", "daniel@a.com", "adfsda.jpg")
+        var at= " ";
+        var firebaseRef = firebase.database().ref();
+        var geoFire = new GeoFire(firebaseRef);
         var latarea = document.getElementById('latarea');
         var longarea = document.getElementById('longarea');
+        geoFire.set(""+Math.round(Math.random()*1000000), [parseFloat(latarea.value), parseFloat(longarea.value)]).then(function() {
 
-        ref.push({name: latarea.value, text: longarea.value});
+            at ="3";
+        }, function(error) {
 
-        latarea.value = " ";
+        });
+       // var k = ref.push({name: latarea.value, text: longarea.value}).toString();
+        // updates[+newPostKey]=pointData;
+        latarea.value =  at;
         longarea.value = " ";
+        geoQuery.updateQuery();
+
     }
+/* Logs to the page instead of the console */
+    function log(message) {
+        var childDiv = document.createElement("div");
+        var textNode = document.createTextNode(message);
+        childDiv.appendChild(textNode);
+        document.getElementById("log").appendChild(childDiv);
+    }
+
 
 

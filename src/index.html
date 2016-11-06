@@ -1,5 +1,26 @@
 <!doctype html>
 <html class="no-js" lang="">
+
+
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.2/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+
+<!-- GeoFire -->
+<script src="https://cdn.firebase.com/libs/geofire/4.1.2/geofire.min.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyDBZSHvB0dsWWK-bjRi3RFSJgszeBsXHsU",
+        authDomain: "toiletlocator-f1303.firebaseapp.com",
+        databaseURL: "https://toiletlocator-f1303.firebaseio.com",
+        storageBucket: "toiletlocator-f1303.appspot.com",
+        messagingSenderId: "333412515574"
+    };
+    firebase.initializeApp(config);
+</script>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -28,6 +49,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
+        <div id="xs"></div>
 
         <h3>My Google Maps Demo</h3>
         <div id="demo"></div>
@@ -35,13 +57,15 @@
         <div id="map"></div>
         <script>
             initMap();
+            popMap();
         </script>
         <div style="text-align: center">
             <button class="submission" onclick="myCord()">Enter My Coordinates</button>
             <textarea id="latarea" onfocus="clearContents(this)" class="submission">Latitude</textarea>
             <textarea id="longarea" onfocus="clearContents(this)" class="submission">Longitude</textarea>
-            <button class="submission" onclick="addToFireBase(firebase)">Submit Lat/Long</button>
+            <button class="submission" onclick="addToFireBase()">Submit Lat/Long</button>
         </div>
+
 
 
 
@@ -59,18 +83,7 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-        <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
-        <script>
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyDUQYqiWi0phdrcGUtivbLcDiY8h8HvPgY",
-                authDomain: "reliefmap-1478369855798.firebaseapp.com",
-                databaseURL: "https://reliefmap-1478369855798.firebaseio.com",
-                storageBucket: "reliefmap-1478369855798.appspot.com",
-                messagingSenderId: "993680483654"
-            };
-            firebase.initializeApp(config);
-        </script>
+
 
 
 
