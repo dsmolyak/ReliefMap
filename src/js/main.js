@@ -68,3 +68,29 @@ var cord ={};
     function clearContents(element) {
         element.value = '';
     }
+
+
+    function writeUserData(userId, name, email, imageUrl) {
+        firebase.database().ref('users/' + userId).set({
+            username: name,
+            email: email,
+            profile_picture : imageUrl
+        });
+    }
+
+    function addToFireBase() {
+        // var ref = new Firebase('https://reliefmap-1478369855798.firebaseio.com/');
+        writeUserData(123, "daniel", "daniel@a.com", "adfsda.jpg")
+
+        var database = firebase.database();
+
+        var latarea = document.getElementById('latarea');
+        var longarea = document.getElementById('longarea');
+
+        ref.push({name: latarea.value, text: longarea.value});
+
+        latarea.value = " ";
+        longarea.value = " ";
+    }
+
+

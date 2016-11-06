@@ -37,15 +37,11 @@
             initMap();
         </script>
         <div style="text-align: center">
+            <button class="submission" onclick="myCord()">Enter My Coordinates</button>
             <textarea id="latarea" onfocus="clearContents(this)" class="submission">Latitude</textarea>
             <textarea id="longarea" onfocus="clearContents(this)" class="submission">Longitude</textarea>
+            <button class="submission" onclick="addToFireBase(firebase)">Submit Lat/Long</button>
         </div>
-
-        <div style="text-align: center">
-            <button class="submission" onclick="myCord()">Enter My Coordinates</button>
-            <button class="submission">Submit Lat/Long</button>
-        </div>
-
 
 
 
@@ -62,6 +58,18 @@
             e.src='https://www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+        </script>
+        <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyDUQYqiWi0phdrcGUtivbLcDiY8h8HvPgY",
+                authDomain: "reliefmap-1478369855798.firebaseapp.com",
+                databaseURL: "https://reliefmap-1478369855798.firebaseio.com",
+                storageBucket: "reliefmap-1478369855798.appspot.com",
+                messagingSenderId: "993680483654"
+            };
+            firebase.initializeApp(config);
         </script>
 
 
