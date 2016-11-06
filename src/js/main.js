@@ -1,5 +1,5 @@
 var me = {};
-var mel = {};
+var mel = [];
 var map;
 var cord ={};
 var geoQuery;
@@ -14,21 +14,24 @@ var geoQuery;
                 me.lng = google.loader.ClientLocation.longitude;
                 dispMap(me);
             }
+
         }
 
     }
     function popMap() {
         var firebaseRef = firebase.database().ref();
         var geoFire = new GeoFire(firebaseRef);
+        console.log("Lat " + me.lat + " : " + "Long " + me.lng);
         geoQuery = geoFire.query({
             center: [me.lat, me.lng],
-            radius: 120000
+            radius: 1200
         });
         geoQuery.on("key_entered", function(key, location, distance) {
             var lo = {
                 lat : location.latitude,
                 lng : location.longitude
             };
+
             adPin(lo );
         });
 
@@ -55,11 +58,12 @@ var geoQuery;
     }
 
     function dispMap(cur) {
-         map = new google.maps.Map(document.getElementById('map'), {
+        map = new google.maps.Map(document.getElementById('map'), {
             zoom: 12,
             center: cur
         });
-       adPin(cur);
+        adPin(cur);
+        popMap();
     }
 
     function myCord() {
@@ -94,15 +98,6 @@ var geoQuery;
 
     function clearContents(element) {
         element.value = '';
-    }
-
-
-    function writeUserData(userId, name, email, imageUrl) {
-        firebase.database().ref('users/' + userId).set({
-            username: name,
-            email: email,
-            profile_picture : imageUrl
-        });
     }
 
     function addToFireBase() {
