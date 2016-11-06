@@ -27,7 +27,7 @@ var geoQuery;
             radius: 1200
         });
         geoQuery.on("key_entered", function(key, location, distance) {
-            console.log("Lat " + location.latitude + " : " + "Long " + location.longitude);
+            console.log("Lat " + location[0] + " : " + "Long " + location[1]);
             var lo = {
                 lat : location[0],
                 lng : location[1]
