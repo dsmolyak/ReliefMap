@@ -27,9 +27,10 @@ var geoQuery;
             radius: 1200
         });
         geoQuery.on("key_entered", function(key, location, distance) {
+            console.log("Lat " + location.latitude + " : " + "Long " + location.longitude);
             var lo = {
-                lat : location.latitude,
-                lng : location.longitude
+                lat : location[0],
+                lng : location[1]
             };
 
             adPin(lo );
